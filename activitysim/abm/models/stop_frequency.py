@@ -214,6 +214,7 @@ def stop_frequency(
             trace_label=tracing.extend_trace_label(trace_label, segment_name),
             trace_choice_name="stops",
             estimator=estimator,
+            compute_settings=model_settings.compute_settings,
         )
 
         # convert indexes to alternative names
@@ -275,7 +276,7 @@ def stop_frequency(
             print(f"survey_trips_not_in_trips\n{survey_trips_not_in_trips}")
             different = True
         trips_not_in_survey_trips = trips[~trips.index.isin(survey_trips.index)]
-        if len(survey_trips_not_in_trips) > 0:
+        if len(trips_not_in_survey_trips) > 0:
             print(f"trips_not_in_survey_trips\n{trips_not_in_survey_trips}")
             different = True
         assert not different

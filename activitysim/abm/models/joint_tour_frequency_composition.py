@@ -9,6 +9,7 @@ import pandas as pd
 
 from activitysim.abm.models.util.overlap import hh_time_window_overlap
 from activitysim.abm.models.util.tour_frequency import (
+    JointTourFreqCompSettings,
     process_joint_tours_frequency_composition,
 )
 from activitysim.core import (
@@ -19,22 +20,9 @@ from activitysim.core import (
     tracing,
     workflow,
 )
-from activitysim.core.configuration.base import PreprocessorSettings
-from activitysim.core.configuration.logit import LogitComponentSettings
 from activitysim.core.interaction_simulate import interaction_simulate
 
 logger = logging.getLogger(__name__)
-
-
-class JointTourFrequencyCompositionSettings(LogitComponentSettings):
-    """
-    Settings for the `joint_tour_frequency_composition` component.
-    """
-
-    preprocessor: PreprocessorSettings | None = None
-    """Setting for the preprocessor."""
-
-    ALTS_PREPROCESSOR: PreprocessorSettings | None = None
 
 
 @workflow.step
@@ -42,7 +30,7 @@ def joint_tour_frequency_composition(
     state: workflow.State,
     households_merged: pd.DataFrame,
     persons: pd.DataFrame,
-    model_settings: JointTourFrequencyCompositionSettings | None = None,
+    model_settings: JointTourFreqCompSettings | None = None,
     model_settings_file_name: str = "joint_tour_frequency_composition.yaml",
     trace_label: str = "joint_tour_frequency_composition",
 ) -> None:
@@ -50,14 +38,16 @@ def joint_tour_frequency_composition(
     This model predicts the frequency and composition of fully joint tours.
     """
     if model_settings is None:
-        model_settings = JointTourFrequencyCompositionSettings.read_settings_file(
+        model_settings = JointTourFreqCompSettings.read_settings_file(
             state.filesystem,
             model_settings_file_name,
         )
 
+    # FIXME setting index as "alt" causes crash in estimation mode...
     alts = simulate.read_model_alts(
-        state, "joint_tour_frequency_composition_alternatives.csv", set_index="alt"
+        state, "joint_tour_frequency_composition_alternatives.csv", set_index=None
     )
+    alts.index = alts["alt"].values
 
     # - only interested in households with more than one cdap travel_active person and
     # - at least one non-preschooler
@@ -116,13 +106,15 @@ def joint_tour_frequency_composition(
         estimator.write_model_settings(model_settings, model_settings_file_name)
         estimator.write_coefficients(coefficients_df, model_settings)
         estimator.write_choosers(choosers)
-        estimator.write_alternatives(alts)
 
         assert choosers.index.name == "household_id"
         assert "household_id" not in choosers.columns
         choosers["household_id"] = choosers.index
 
         estimator.set_chooser_id(choosers.index.name)
+
+        # FIXME set_alt_id - do we need this for interaction_simulate estimation bundle tables?
+        estimator.set_alt_id("alt_id")
 
     # The choice value 'joint_tour_frequency_composition' assigned by interaction_simulate
     # is the index value of the chosen alternative in the alternatives table.
@@ -136,6 +128,7 @@ def joint_tour_frequency_composition(
         trace_choice_name=trace_label,
         estimator=estimator,
         explicit_chunk_size=0,
+        compute_settings=model_settings.compute_settings,
     )
 
     if estimator:
@@ -157,6 +150,7 @@ def joint_tour_frequency_composition(
     # - but we don't know the tour participants yet
     # - so we arbitrarily choose the first person in the household
     # - to be point person for the purpose of generating an index and setting origin
+    # FIXME: not all models are guaranteed to have PNUM
     temp_point_persons = persons.loc[persons.PNUM == 1]
     temp_point_persons["person_id"] = temp_point_persons.index
     temp_point_persons = temp_point_persons.set_index("household_id")
@@ -195,8 +189,10 @@ def joint_tour_frequency_composition(
 
     # we expect there to be an alt with no tours - which we can use to backfill non-travelers
     no_tours_alt = 0
-    households_merged["joint_tour_frequency_composition"] = (
-        choices.reindex(households_merged.index).fillna(no_tours_alt).astype(str)
+    # keep memory usage down by downcasting
+    households_merged["joint_tour_frequency_composition"] = pd.to_numeric(
+        choices.reindex(households_merged.index).fillna(no_tours_alt),
+        downcast="integer",
     )
 
     households_merged["num_hh_joint_tours"] = (

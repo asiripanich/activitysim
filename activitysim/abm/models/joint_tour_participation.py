@@ -18,7 +18,7 @@ from activitysim.core import (
     tracing,
     workflow,
 )
-from activitysim.core.configuration.base import PreprocessorSettings
+from activitysim.core.configuration.base import ComputeSettings, PreprocessorSettings
 from activitysim.core.configuration.logit import LogitComponentSettings
 from activitysim.core.util import assign_in_place, reindex
 
@@ -214,6 +214,10 @@ def participants_chooser(
                 probs[choice_col] = np.where(probs[choice_col] > 0, 1, 0)
                 non_choice_col = [col for col in probs.columns if col != choice_col][0]
                 probs[non_choice_col] = 1 - probs[choice_col]
+                if iter > MAX_ITERATIONS + 1:
+                    raise RuntimeError(
+                        f"{num_tours_remaining} tours could not be satisfied even with forcing participation"
+                    )
             else:
                 raise RuntimeError(
                     f"{num_tours_remaining} tours could not be satisfied after {iter} iterations"
@@ -404,6 +408,15 @@ def joint_tour_participation(
     )
     candidates["chunk_id"] = reindex(household_chunk_ids, candidates.household_id)
 
+    # these hardcoded columns need to be protected from being dropped
+    assert model_settings is not None
+    if model_settings.compute_settings is None:
+        model_settings.compute_settings = ComputeSettings()
+    assert model_settings.compute_settings is not None
+    for i in ["person_is_preschool", "composition", "adult"]:
+        if i not in model_settings.compute_settings.protect_columns:
+            model_settings.compute_settings.protect_columns.append(i)
+
     choices = simulate.simple_simulate_by_chunk_id(
         state,
         choosers=candidates,
@@ -414,6 +427,7 @@ def joint_tour_participation(
         trace_choice_name="participation",
         custom_chooser=participants_chooser,
         estimator=estimator,
+        compute_settings=model_settings.compute_settings,
     )
 
     # choice is boolean (participate or not)
