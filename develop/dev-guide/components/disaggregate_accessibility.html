@@ -40,8 +40,8 @@
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script src="../../_static/documentation_options.js?v=7cf78f66"></script>
-    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/documentation_options.js?v=0eed3d68"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=f281be69"></script>
@@ -50,7 +50,7 @@
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.15.2';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://asiripanich.github.io/activitysim/switcher.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.1.dev3383';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.1.dev3436';
         DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
         </script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -59,7 +59,7 @@
     <link rel="prev" title="Mandatory Tour Scheduling" href="mandatory_scheduling.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-    <meta name="docbuild:last-update" content="Mar 15, 2024"/>
+    <meta name="docbuild:last-update" content="May 24, 2024"/>
   </head>
   
   
@@ -309,7 +309,30 @@ document.write(`
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../install.html">Developer Installation</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../core-workflow.html">Workflow State</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../core-workflow-api.html">State API</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../core-workflow-api.html">State API</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../_generated/activitysim.core.workflow.State.__init__.html">State.__init__</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_generated/activitysim.core.workflow.State.make_default.html">State.make_default</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_generated/activitysim.core.workflow.State.make_temp.html">State.make_temp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_generated/activitysim.core.workflow.create_example.html">create_example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_generated/activitysim.core.workflow.State.run.heading_level.html">State.run.heading_level</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_generated/activitysim.core.workflow.State.checkpoint.last_checkpoint.html">State.checkpoint.last_checkpoint</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_generated/activitysim.core.workflow.State.checkpoint.checkpoints.html">State.checkpoint.checkpoints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_generated/activitysim.core.workflow.State.checkpoint.store.html">State.checkpoint.store</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_generated/activitysim.core.workflow.State.tracing.initialize.html">State.tracing.initialize</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_generated/activitysim.core.workflow.State.tracing.register_traceable_table.html">State.tracing.register_traceable_table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_generated/activitysim.core.workflow.State.tracing.deregister_traceable_table.html">State.tracing.deregister_traceable_table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_generated/activitysim.core.workflow.State.tracing.write_csv.html">State.tracing.write_csv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_generated/activitysim.core.workflow.State.tracing.trace_df.html">State.tracing.trace_df</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_generated/activitysim.core.workflow.State.tracing.trace_interaction_eval_results.html">State.tracing.trace_interaction_eval_results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_generated/activitysim.core.workflow.State.tracing.get_trace_target.html">State.tracing.get_trace_target</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_generated/activitysim.core.workflow.State.tracing.trace_targets.html">State.tracing.trace_targets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_generated/activitysim.core.workflow.State.tracing.has_trace_targets.html">State.tracing.has_trace_targets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_generated/activitysim.core.workflow.State.tracing.dump_df.html">State.tracing.dump_df</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_generated/activitysim.core.workflow.State.tracing.delete_output_files.html">State.tracing.delete_output_files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_generated/activitysim.core.workflow.State.tracing.delete_trace_files.html">State.tracing.delete_trace_files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_generated/activitysim.core.workflow.State.extend.declare_table.html">State.extend.declare_table</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../core-workflow-steps.html">Workflow Steps</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../core-workflow-table.html">Workflow Tables</a></li>
 </ul>
@@ -321,7 +344,7 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../development.html">Software Development</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../component-configs.html">Component Configuration</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Components</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Components</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="initialize.html">Initialize</a></li>
 <li class="toctree-l2"><a class="reference internal" href="initialize_los.html">Initialize LOS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="initialize_tours.html">Initialize Tours</a></li>
@@ -497,6 +520,7 @@ into the pipeline and initialized with the initialize_household model step.</p>
 <li><p><a class="reference internal" href="#activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.CREATE_TABLES" title="activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.CREATE_TABLES"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CREATE_TABLES</span> <span class="pre">(dict[str,</span> <span class="pre">DisaggregateAccessibilityTableSettings</span> <span class="pre">|</span> <span class="pre">str])</span></code></a></p></li>
 <li><p><a class="reference internal" href="#activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.DESTINATION_SAMPLE_SIZE" title="activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.DESTINATION_SAMPLE_SIZE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DESTINATION_SAMPLE_SIZE</span> <span class="pre">(float</span> <span class="pre">|</span> <span class="pre">int)</span></code></a></p></li>
 <li><p><a class="reference internal" href="#activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.FROM_TEMPLATES" title="activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.FROM_TEMPLATES"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FROM_TEMPLATES</span> <span class="pre">(bool)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.KEEP_COLS" title="activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.KEEP_COLS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KEEP_COLS</span> <span class="pre">(list[str]</span> <span class="pre">|</span> <span class="pre">None)</span></code></a></p></li>
 <li><p><a class="reference internal" href="#activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.MERGE_ON" title="activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.MERGE_ON"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MERGE_ON</span> <span class="pre">(dict[str,</span> <span class="pre">list[str]])</span></code></a></p></li>
 <li><p><a class="reference internal" href="#activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.NEAREST_METHOD" title="activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.NEAREST_METHOD"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NEAREST_METHOD</span> <span class="pre">(str)</span></code></a></p></li>
 <li><p><a class="reference internal" href="#activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.ORIGIN_SAMPLE_METHOD" title="activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.ORIGIN_SAMPLE_METHOD"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ORIGIN_SAMPLE_METHOD</span> <span class="pre">(Literal[None,</span> <span class="pre">'full',</span> <span class="pre">'uniform',</span> <span class="pre">'uniform-taz',</span> <span class="pre">'kmeans'])</span></code></a></p></li>
@@ -504,6 +528,8 @@ into the pipeline and initialized with the initialize_household model step.</p>
 <li><p><a class="reference internal" href="#activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.ORIGIN_WEIGHTING_COLUMN" title="activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.ORIGIN_WEIGHTING_COLUMN"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ORIGIN_WEIGHTING_COLUMN</span> <span class="pre">(str)</span></code></a></p></li>
 <li><p><a class="reference internal" href="#activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.add_size_tables" title="activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.add_size_tables"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_size_tables</span> <span class="pre">(bool)</span></code></a></p></li>
 <li><p><a class="reference internal" href="#activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.annotate_proto_tables" title="activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.annotate_proto_tables"><code class="xref py py-obj docutils literal notranslate"><span class="pre">annotate_proto_tables</span> <span class="pre">(list[DisaggregateAccessibilityAnnotateSettings])</span></code></a></p></li>
+<li><p><a class="reference internal" href="#activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.explicit_chunk" title="activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.explicit_chunk"><code class="xref py py-obj docutils literal notranslate"><span class="pre">explicit_chunk</span> <span class="pre">(float</span> <span class="pre">|</span> <span class="pre">None)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.postprocess_proto_tables" title="activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.postprocess_proto_tables"><code class="xref py py-obj docutils literal notranslate"><span class="pre">postprocess_proto_tables</span> <span class="pre">(list[DisaggregateAccessibilityAnnotateSettings])</span></code></a></p></li>
 <li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">source_file_paths</span> <span class="pre">()</span></code></p></li>
 <li><p><a class="reference internal" href="#activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.suffixes" title="activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.suffixes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">suffixes</span> <span class="pre">(DisaggregateAccessibilitySuffixes)</span></code></a></p></li>
 <li><p><a class="reference internal" href="#activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.zone_id_names" title="activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.zone_id_names"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zone_id_names</span> <span class="pre">(dict[str,</span> <span class="pre">str])</span></code></a></p></li>
@@ -532,6 +558,16 @@ into the pipeline and initialized with the initialize_household model step.</p>
 <dt class="sig sig-object py" id="activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.FROM_TEMPLATES">
 <em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">FROM_TEMPLATES</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.FROM_TEMPLATES" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.KEEP_COLS">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">KEEP_COLS</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.KEEP_COLS" title="Link to this definition">#</a></dt>
+<dd><p>Disaggreate accessibility table is grouped by the “by” cols above and the KEEP_COLS are averaged
+across the group.  Initializing the below as NA if not in the auto ownership level, they are skipped
+in the groupby mean and the values are correct. 
+(It’s a way to avoid having to update code to reshape the table and introduce new functionality there.)
+If none, will keep all of the columns with “accessibility” in the name.</p>
+</dd></dl>
 
 <dl class="py attribute pydantic_field">
 <dt class="sig sig-object py" id="activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.MERGE_ON">
@@ -617,6 +653,20 @@ proto-population beyond basic generation in the YAML.</p>
 </dd></dl>
 
 <dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.explicit_chunk">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">explicit_chunk</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.explicit_chunk" title="Link to this definition">#</a></dt>
+<dd><p>If &gt; 0, use this chunk size instead of adaptive chunking.
+If less than 1, use this fraction of the total number of rows.
+If not supplied or None, will default to the chunk size in the location choice model settings.</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.postprocess_proto_tables">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">postprocess_proto_tables</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><span class="pre">DisaggregateAccessibilityAnnotateSettings</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.postprocess_proto_tables" title="Link to this definition">#</a></dt>
+<dd><p>List of preprocessor settings to apply to the proto-population tables after generation.</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
 <dt class="sig sig-object py" id="activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.suffixes">
 <em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">suffixes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">DisaggregateAccessibilitySuffixes</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">DisaggregateAccessibilitySuffixes(source_file_paths=None,</span> <span class="pre">SUFFIX='proto_',</span> <span class="pre">ROOTS=['persons',</span> <span class="pre">'households',</span> <span class="pre">'tours',</span> <span class="pre">'persons_merged',</span> <span class="pre">'person_id',</span> <span class="pre">'household_id',</span> <span class="pre">'tour_id'])</span></em><a class="headerlink" href="#activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.suffixes" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
@@ -625,12 +675,6 @@ proto-population beyond basic generation in the YAML.</p>
 <dt class="sig sig-object py" id="activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.zone_id_names">
 <em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">zone_id_names</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'index_col':</span> <span class="pre">'zone_id'}</span></em><a class="headerlink" href="#activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.zone_id_names" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.model_computed_fields">
-<span class="sig-name descname"><span class="pre">model_computed_fields</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ComputedFieldInfo</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.model_computed_fields" title="Link to this definition">#</a></dt>
-<dd><p>A dictionary of computed field names and their corresponding <cite>ComputedFieldInfo</cite> objects.</p>
-</dd></dl>
 
 </dd></dl>
 
@@ -700,6 +744,7 @@ proto-population beyond basic generation in the YAML.</p>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.CREATE_TABLES"><code class="docutils literal notranslate"><span class="pre">DisaggregateAccessibilitySettings.CREATE_TABLES</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.DESTINATION_SAMPLE_SIZE"><code class="docutils literal notranslate"><span class="pre">DisaggregateAccessibilitySettings.DESTINATION_SAMPLE_SIZE</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.FROM_TEMPLATES"><code class="docutils literal notranslate"><span class="pre">DisaggregateAccessibilitySettings.FROM_TEMPLATES</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.KEEP_COLS"><code class="docutils literal notranslate"><span class="pre">DisaggregateAccessibilitySettings.KEEP_COLS</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.MERGE_ON"><code class="docutils literal notranslate"><span class="pre">DisaggregateAccessibilitySettings.MERGE_ON</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.NEAREST_METHOD"><code class="docutils literal notranslate"><span class="pre">DisaggregateAccessibilitySettings.NEAREST_METHOD</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.ORIGIN_SAMPLE_METHOD"><code class="docutils literal notranslate"><span class="pre">DisaggregateAccessibilitySettings.ORIGIN_SAMPLE_METHOD</span></code></a></li>
@@ -707,9 +752,10 @@ proto-population beyond basic generation in the YAML.</p>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.ORIGIN_WEIGHTING_COLUMN"><code class="docutils literal notranslate"><span class="pre">DisaggregateAccessibilitySettings.ORIGIN_WEIGHTING_COLUMN</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.add_size_tables"><code class="docutils literal notranslate"><span class="pre">DisaggregateAccessibilitySettings.add_size_tables</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.annotate_proto_tables"><code class="docutils literal notranslate"><span class="pre">DisaggregateAccessibilitySettings.annotate_proto_tables</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.explicit_chunk"><code class="docutils literal notranslate"><span class="pre">DisaggregateAccessibilitySettings.explicit_chunk</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.postprocess_proto_tables"><code class="docutils literal notranslate"><span class="pre">DisaggregateAccessibilitySettings.postprocess_proto_tables</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.suffixes"><code class="docutils literal notranslate"><span class="pre">DisaggregateAccessibilitySettings.suffixes</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.zone_id_names"><code class="docutils literal notranslate"><span class="pre">DisaggregateAccessibilitySettings.zone_id_names</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#activitysim.abm.models.disaggregate_accessibility.DisaggregateAccessibilitySettings.model_computed_fields"><code class="docutils literal notranslate"><span class="pre">DisaggregateAccessibilitySettings.model_computed_fields</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a></li>
@@ -751,13 +797,13 @@ proto-population beyond basic generation in the YAML.</p>
       
         <div class="footer-item"><!-- This will display the version of the docs -->
 <p class="last-updated">
-ActivitySim 0.1.dev3383+ga2cbbb4, documentation last updated Mar 15, 2024.<br/>
+ActivitySim 0.1.dev3436+gb710298, documentation last updated May 24, 2024.<br/>
 </p></div>
       
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
     <br/>
   </p>
 </div>

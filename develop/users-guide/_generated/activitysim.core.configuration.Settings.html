@@ -40,8 +40,8 @@
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script src="../../_static/documentation_options.js?v=7cf78f66"></script>
-    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/documentation_options.js?v=0eed3d68"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=f281be69"></script>
@@ -50,14 +50,14 @@
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.15.2';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://asiripanich.github.io/activitysim/switcher.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.1.dev3383';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.1.dev3436';
         DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
         </script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-    <meta name="docbuild:last-update" content="Mar 15, 2024"/>
+    <meta name="docbuild:last-update" content="May 24, 2024"/>
   </head>
   
   
@@ -437,7 +437,7 @@ the model.</p>
 <em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">benchmarking</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#activitysim.core.configuration.Settings.benchmarking" title="Link to this definition">#</a></dt>
 <dd><p>Flag this model run as a benchmarking run.</p>
 <div class="versionadded">
-<p><span class="versionmodified added">New in version 1.1.</span></p>
+<p><span class="versionmodified added">Added in version 1.1.</span></p>
 </div>
 <p>This is generally a developer-only feature and not needed for regular usage
 of ActivitySim.</p>
@@ -514,8 +514,8 @@ memory occupied by a process that is held in RAM.</p>
 </dl>
 </li>
 </ul>
-<p>RSS is reported by <a class="reference external" href="https://psutil.readthedocs.io/en/latest/index.html#psutil.Process.memory_info" title="(in psutil v5.9.8)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">psutil.Process.memory_info()</span></code></a> and USS is reported by
-<a class="reference external" href="https://psutil.readthedocs.io/en/latest/index.html#psutil.Process.memory_full_info" title="(in psutil v5.9.8)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">psutil.Process.memory_full_info()</span></code></a>.  USS is the memory which is private to
+<p>RSS is reported by <a class="reference external" href="https://psutil.readthedocs.io/en/latest/index.html#psutil.Process.memory_info" title="(in psutil v6.0.0)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">psutil.Process.memory_info()</span></code></a> and USS is reported by
+<a class="reference external" href="https://psutil.readthedocs.io/en/latest/index.html#psutil.Process.memory_full_info" title="(in psutil v6.0.0)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">psutil.Process.memory_full_info()</span></code></a>.  USS is the memory which is private to
 a process and which would be freed if the process were terminated.  This is
 the metric that most closely matches the rather vague notion of memory
 “in use” (the meaning of which is difficult to pin down in operating systems
@@ -621,7 +621,7 @@ model runs, as reading HDF5 can be faster than reading CSV files.</p>
 <em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">disable_zarr</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#activitysim.core.configuration.Settings.disable_zarr" title="Link to this definition">#</a></dt>
 <dd><p>Disable the use of zarr format skims.</p>
 <div class="versionadded">
-<p><span class="versionmodified added">New in version 1.2.</span></p>
+<p><span class="versionmodified added">Added in version 1.2.</span></p>
 </div>
 <p>By default, if sharrow is enabled (any setting other than false), ActivitySim
 currently loads data from zarr format skims if a zarr location is provided,
@@ -637,7 +637,7 @@ True will disable the use of zarr.</p>
 <dd><p>automatically downcasting float variables.</p>
 <p>Use of this setting should be tested by the region to confirm result consistency.</p>
 <div class="versionadded">
-<p><span class="versionmodified added">New in version 1.3.</span></p>
+<p><span class="versionmodified added">Added in version 1.3.</span></p>
 </div>
 </dd></dl>
 
@@ -647,7 +647,7 @@ True will disable the use of zarr.</p>
 <dd><p>automatically downcasting integer variables.</p>
 <p>Use of this setting should be tested by the region to confirm result consistency.</p>
 <div class="versionadded">
-<p><span class="versionmodified added">New in version 1.3.</span></p>
+<p><span class="versionmodified added">Added in version 1.3.</span></p>
 </div>
 </dd></dl>
 
@@ -656,7 +656,7 @@ True will disable the use of zarr.</p>
 <em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">duplicate_step_execution</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'error'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'allow'</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'error'</span></em><a class="headerlink" href="#activitysim.core.configuration.Settings.duplicate_step_execution" title="Link to this definition">#</a></dt>
 <dd><p>How activitysim should handle attempts to re-run a step with the same name.</p>
 <div class="versionadded">
-<p><span class="versionmodified added">New in version 1.3.</span></p>
+<p><span class="versionmodified added">Added in version 1.3.</span></p>
 </div>
 <ul class="simple">
 <li><dl class="simple">
@@ -726,7 +726,7 @@ have any other effect on the operation of the model(s).</p>
 <em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">instrument</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#activitysim.core.configuration.Settings.instrument" title="Link to this definition">#</a></dt>
 <dd><p>Use <cite>pyinstrument</cite> to profile component performance.</p>
 <div class="versionadded">
-<p><span class="versionmodified added">New in version 1.2.</span></p>
+<p><span class="versionmodified added">Added in version 1.2.</span></p>
 </div>
 <p>This is generally a developer-only feature and not needed for regular usage
 of ActivitySim.</p>
@@ -773,7 +773,7 @@ Enabling this check does not alter valid results but slows down model runs.</p>
 <em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">memory_profile</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#activitysim.core.configuration.Settings.memory_profile" title="Link to this definition">#</a></dt>
 <dd><p>Generate a memory profile by sampling memory usage from a secondary process.</p>
 <div class="versionadded">
-<p><span class="versionmodified added">New in version 1.2.</span></p>
+<p><span class="versionmodified added">Added in version 1.2.</span></p>
 </div>
 <p>This is generally a developer-only feature and not needed for regular usage
 of ActivitySim.</p>
@@ -824,7 +824,7 @@ half the number of available CPU cores, plus 1.</p>
 <em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">offset_preprocessing</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#activitysim.core.configuration.Settings.offset_preprocessing" title="Link to this definition">#</a></dt>
 <dd><p>Flag to indicate whether offset preprocessing has already been done.</p>
 <div class="versionadded">
-<p><span class="versionmodified added">New in version 1.2.</span></p>
+<p><span class="versionmodified added">Added in version 1.2.</span></p>
 </div>
 <p>This flag is generally set automatically within ActivitySim during a run,
 and not be a user ahead of time.  The ability to do so is provided as a
@@ -847,7 +847,7 @@ developer-only feature for testing and development.</p>
 <em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pipeline_complib</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'NOTSET'</span></em><a class="headerlink" href="#activitysim.core.configuration.Settings.pipeline_complib" title="Link to this definition">#</a></dt>
 <dd><p>Compression library to use when storing pipeline tables in an HDF5 file.</p>
 <div class="versionadded">
-<p><span class="versionmodified added">New in version 1.3.</span></p>
+<p><span class="versionmodified added">Added in version 1.3.</span></p>
 </div>
 </dd></dl>
 
@@ -856,7 +856,7 @@ developer-only feature for testing and development.</p>
 <em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">recode_pipeline_columns</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#activitysim.core.configuration.Settings.recode_pipeline_columns" title="Link to this definition">#</a></dt>
 <dd><p>Apply recoding instructions on input and final output for pipeline tables.</p>
 <div class="versionadded">
-<p><span class="versionmodified added">New in version 1.2.</span></p>
+<p><span class="versionmodified added">Added in version 1.2.</span></p>
 </div>
 <p>Recoding instructions can be provided in individual
 <a class="reference internal" href="activitysim.core.configuration.InputTable.html#activitysim.core.configuration.InputTable.recode_columns" title="activitysim.core.configuration.InputTable.recode_columns"><code class="xref py py-attr docutils literal notranslate"><span class="pre">InputTable.recode_columns</span></code></a> and <a class="reference internal" href="activitysim.core.configuration.OutputTable.html#activitysim.core.configuration.OutputTable.decode_columns" title="activitysim.core.configuration.OutputTable.decode_columns"><code class="xref py py-attr docutils literal notranslate"><span class="pre">OutputTable.decode_columns</span></code></a>
@@ -891,7 +891,7 @@ compatible with using <a class="reference internal" href="#activitysim.core.conf
 <em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sharrow</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#activitysim.core.configuration.Settings.sharrow" title="Link to this definition">#</a></dt>
 <dd><p>Set the sharrow operating mode.</p>
 <div class="versionadded">
-<p><span class="versionmodified added">New in version 1.2.</span></p>
+<p><span class="versionmodified added">Added in version 1.2.</span></p>
 </div>
 <ul class="simple">
 <li><p><cite>false</cite> - Do not use sharrow.  This is the default if no value is given.</p></li>
@@ -943,7 +943,7 @@ of the model.</p>
 <dd><p>Treat most warnings as errors.</p>
 <p>Use of this setting is not recommended outside of rigorous testing regimes.</p>
 <div class="versionadded">
-<p><span class="versionmodified added">New in version 1.3.</span></p>
+<p><span class="versionmodified added">Added in version 1.3.</span></p>
 </div>
 </dd></dl>
 
@@ -973,12 +973,6 @@ of ActivitySim.</p>
 <p>The data tables are written out to <cite>&lt;output_dir&gt;/raw_tables</cite> before any
 annotation steps, but after initial processing (renaming, filtering columns,
 recoding).</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="activitysim.core.configuration.Settings.model_computed_fields">
-<span class="sig-name descname"><span class="pre">model_computed_fields</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ComputedFieldInfo</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#activitysim.core.configuration.Settings.model_computed_fields" title="Link to this definition">#</a></dt>
-<dd><p>A dictionary of computed field names and their corresponding <cite>ComputedFieldInfo</cite> objects.</p>
 </dd></dl>
 
 </dd></dl>
@@ -1065,7 +1059,6 @@ recoding).</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#activitysim.core.configuration.Settings.want_dest_choice_presampling"><code class="docutils literal notranslate"><span class="pre">Settings.want_dest_choice_presampling</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#activitysim.core.configuration.Settings.want_dest_choice_sample_tables"><code class="docutils literal notranslate"><span class="pre">Settings.want_dest_choice_sample_tables</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#activitysim.core.configuration.Settings.write_raw_tables"><code class="docutils literal notranslate"><span class="pre">Settings.write_raw_tables</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#activitysim.core.configuration.Settings.model_computed_fields"><code class="docutils literal notranslate"><span class="pre">Settings.model_computed_fields</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -1103,13 +1096,13 @@ recoding).</p>
       
         <div class="footer-item"><!-- This will display the version of the docs -->
 <p class="last-updated">
-ActivitySim 0.1.dev3383+ga2cbbb4, documentation last updated Mar 15, 2024.<br/>
+ActivitySim 0.1.dev3436+gb710298, documentation last updated May 24, 2024.<br/>
 </p></div>
       
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
     <br/>
   </p>
 </div>
