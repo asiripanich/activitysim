@@ -551,6 +551,11 @@ def run_location_logsums(
 
     logger.info(f"Running {trace_label} with {len(location_sample_df.index)} rows")
 
+    # Drop columns from persons_merged_df that are already in location_sample_df
+    # to prevent _x/_y suffix conflicts in the join (sample columns take priority)
+    persons_merged_df = persons_merged_df.drop(
+        columns=[c for c in persons_merged_df.columns if c in location_sample_df.columns]
+    )
     choosers = location_sample_df.join(persons_merged_df, how="left")
 
     tour_purpose = model_settings.LOGSUM_TOUR_PURPOSE

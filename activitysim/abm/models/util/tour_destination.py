@@ -623,6 +623,11 @@ def run_destination_sample(
     # if special person id is passed
     chooser_id_column = model_settings.CHOOSER_ID_COLUMN
 
+    # Drop columns from persons_merged that are already in tours to prevent
+    # _x/_y suffix conflicts in the merge (tours columns take priority)
+    persons_merged = persons_merged.drop(
+        columns=[c for c in persons_merged.columns if c in tours.columns]
+    )
     choosers = pd.merge(
         tours, persons_merged, left_on=chooser_id_column, right_index=True, how="left"
     )
@@ -718,6 +723,11 @@ def run_destination_logsums(
 
     chunk_tag = "tour_destination.logsums"
 
+    # Drop columns from persons_merged that are already in destination_sample to
+    # prevent _x/_y suffix conflicts in the merge (sample columns take priority)
+    persons_merged = persons_merged.drop(
+        columns=[c for c in persons_merged.columns if c in destination_sample.columns]
+    )
     # merge persons into tours
     choosers = pd.merge(
         destination_sample,
@@ -783,6 +793,11 @@ def run_destination_simulate(
     # if special person id is passed
     chooser_id_column = model_settings.CHOOSER_ID_COLUMN
 
+    # Drop columns from persons_merged that are already in tours to prevent
+    # _x/_y suffix conflicts in the merge (tours columns take priority)
+    persons_merged = persons_merged.drop(
+        columns=[c for c in persons_merged.columns if c in tours.columns]
+    )
     choosers = pd.merge(
         tours, persons_merged, left_on=chooser_id_column, right_index=True, how="left"
     )

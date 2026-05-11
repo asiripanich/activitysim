@@ -767,6 +767,11 @@ def run_od_logsums(
     dest_id_col = model_settings.DEST_COL_NAME
     tour_od_id_col = get_od_id_col(origin_id_col, dest_id_col)
 
+    # Drop columns from tours_merged_df that are already in od_sample to prevent
+    # _x/_y suffix conflicts in the join (sample columns take priority)
+    tours_merged_df = tours_merged_df.drop(
+        columns=[c for c in tours_merged_df.columns if c in od_sample.columns]
+    )
     # merge ods into choosers table
     choosers = od_sample.join(tours_merged_df, how="left")
     choosers[tour_od_id_col] = (
