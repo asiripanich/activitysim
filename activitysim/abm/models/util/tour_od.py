@@ -178,6 +178,7 @@ def _od_sample(
         "orig_col_name": ORIG_TAZ,
         "dest_col_name": DEST_TAZ,
     }
+    locals_d.update(state.get_global_constants())
     constants = model_settings.CONSTANTS
     if constants is not None:
         locals_d.update(constants)
@@ -690,12 +691,6 @@ def run_od_sample(
     )
 
     choosers = tours
-    # FIXME - MEMORY HACK - only include columns actually used in spec
-    chooser_columns = model_settings.SIMULATE_CHOOSER_COLUMNS
-    # Drop this when PR #1017 is merged
-    if ("household_id" not in chooser_columns) and ("household_id" in choosers.columns):
-        chooser_columns = chooser_columns + ["household_id"]
-    choosers = choosers[chooser_columns]
 
     # interaction_sample requires that choosers.index.is_monotonic_increasing
     if not choosers.index.is_monotonic_increasing:
@@ -772,11 +767,11 @@ def run_od_logsums(
     dest_id_col = model_settings.DEST_COL_NAME
     tour_od_id_col = get_od_id_col(origin_id_col, dest_id_col)
 
-    # FIXME - MEMORY HACK - only include columns actually used in spec
-    tours_merged_df = logsum.filter_chooser_columns(
-        tours_merged_df, logsum_settings, model_settings
+    # Drop columns from tours_merged_df that are already in od_sample to prevent
+    # _x/_y suffix conflicts in the join (sample columns take priority)
+    tours_merged_df = tours_merged_df.drop(
+        columns=[c for c in tours_merged_df.columns if c in od_sample.columns]
     )
-
     # merge ods into choosers table
     choosers = od_sample.join(tours_merged_df, how="left")
     choosers[tour_od_id_col] = (
@@ -952,13 +947,6 @@ def run_od_simulate(
     # merge persons into tours
     choosers = tours
 
-    # FIXME - MEMORY HACK - only include columns actually used in spec
-    chooser_columns = model_settings.SIMULATE_CHOOSER_COLUMNS
-    # Drop this when PR #1017 is merged
-    if ("household_id" not in chooser_columns) and ("household_id" in choosers.columns):
-        chooser_columns = chooser_columns + ["household_id"]
-    choosers = choosers[chooser_columns]
-
     # interaction_sample requires that choosers.index.is_monotonic_increasing
     if not choosers.index.is_monotonic_increasing:
         logger.debug(
@@ -1009,6 +997,7 @@ def run_od_simulate(
         "orig_col_name": origin_col_name,
         "dest_col_name": dest_col_name,
     }
+    locals_d.update(state.get_global_constants())
     if constants is not None:
         locals_d.update(constants)
 
