@@ -11,32 +11,216 @@ configurations or code to fail to run correctly.
 
 This section describes changes that are implemented in current development
 branch (i.e., the main branch on GitHub), but not yet released in a stable version
-of ActivitySim.  See below under the various version headings for changes in
-released versions.
+of ActivitySim.
+
+### Skip Failed Choices Fixes
+
+This release fixes several failures in model runs with `skip_failed_choices`
+enabled ([#1129](https://github.com/ActivitySim/activitysim/issues/1129),
+[PR #1130](https://github.com/ActivitySim/activitysim/pull/1130)):
+
+- A chooser for which no alternative can be sampled is now skipped together
+  with its household, like other failed choices. Previously the failure was
+  logged, but the model step then crashed. This applies to work and school
+  location choice and to tour destination choice (non-mandatory, joint and
+  at-work), including steps in which every chooser fails while destination
+  sample tables are written.
+- With `allow_zero_probs`, `interaction_simulate` and
+  `interaction_sample_simulate` now find choosers with no available
+  alternative by testing each utility against the availability threshold. The
+  previous comparison of row sums was not exact and could miss such choosers.
+
+Code that calls `interaction_simulate` or `interaction_sample_simulate` with
+`allow_zero_probs=True` must now also pass `zero_prob_choice_val`, or a
+`ValueError` is raised. Previously, choosers with no available alternative
+silently kept an alternative they cannot choose. Logsum-only calls to
+`interaction_sample_simulate` with `skip_choice=True` do not need a value. All
+built-in models already pass one.
+
+A known limitation remains: because `skip_failed_choices` turns off overflow
+protection, valid but very low utilities can still underflow to zero
+probability with `float32` utilities, and the household is then skipped.
+
+### Python 3.11 or Newer Required
+
+ActivitySim now requires Python 3.11, 3.12 or 3.13. Python 3.10 is no longer
+supported because it has reached end of life. Installing ActivitySim into a
+Python 3.10 environment selects an older ActivitySim release instead of the
+latest one, so recreate such environments with Python 3.11 or newer.
+
+### Windows Installer Discontinued
+
+The pre-packaged Windows installer is no longer built or provided. Install
+ActivitySim with *uv* instead, as described in the Users Guide.
+
+### Minimum uv and certifi Versions
+
+Installing ActivitySim from source with the lockfile now requires *uv* 0.13.4 or
+newer, and the lockfile requires certifi 2026.10.19 or newer. Older versions
+trust a compromised certificate authority; see the
+[eMudhra/emSign CA certificate incident](https://discuss.python.org/t/information-for-python-users-regarding-emudhra-emsign-ca-certificate-security-incident/109576).
+
+### Shadow Pricing Re-Simulation Segmentation
+
+In version 1.6.1, the segmentation used for shadow pricing re-simulation now
+inherits the segmentation used in the work and school location choice simulation,
+e.g., defined as `CHOOSER_SEGMENT_COLUMN_NAME` in the `workplace_location.yaml`.
+The legacy setting `SEGMENT_TO_NAME` in the `shadow_pricing.yaml` is now deprecated
+and ignored. This ensures consistency between the segmentation used for shadow
+pricing re-simulation and the segmentation used for work and school location
+choice simulation. See
+[Issue #1082](https://github.com/ActivitySim/activitysim/issues/1082) and
+[PR #1083](https://github.com/ActivitySim/activitysim/pull/1083).
+
+
+## v1.6
+
+This release adds explicit error-term simulation and new alternative-sampling
+methods, park-and-ride lot choice with capacity constraints, and support for
+reading skims from Parquet files. It also expands explicit chunking, improves
+performance and reproducibility, and includes several simulation and estimation
+fixes. Users upgrading an existing model should review the breaking and
+behavior-changing items below.
+
+### Removal of Three-Zone Models
+
+The legacy three-zone level-of-service implementation, including the TAP/TVPB
+pathbuilder, three-zone configuration settings, and bundled three-zone examples,
+has been removed. ActivitySim continues to support one- and two-zone models.
+Existing three-zone model implementations cannot be run with ActivitySim 1.6
+without replacing or independently maintaining the removed functionality. See
+[PR #1056](https://github.com/ActivitySim/activitysim/pull/1056) and
+[PR #1072](https://github.com/ActivitySim/activitysim/pull/1072).
+
+### Updated Dependency Requirements
+
+ActivitySim now requires NumPy 2.x, Pandera 0.30 or newer, and Sharrow 2.16 or
+newer. The upper bound on supported pandas versions is now pandas 2.x.
+
+### Explicit Error Terms and Sampling Methods
+
+ActivitySim can now make choices by drawing the unobserved portion of utility
+explicitly and selecting the alternative with the greatest total utility. This
+simulation method is enabled by setting `use_explicit_error_terms` to `True`.
+
+Alternative sampling is now configured separately with `sample_method`. The
+available methods are `inverse_cdf`, `eet`, and `poisson`. When `sample_method`
+is not set, ActivitySim uses `inverse_cdf` for the standard simulation method
+and `poisson` when explicit error terms are enabled. A component can override
+the global sampling method in its `compute_settings`.
+
+See [Explicit Error Terms](explicit-error-terms) and
+[Sampling Methods](sampling-methods) for details, including guidance on
+reproducibility and location-choice logsum bias. This functionality was added
+in [PR #1064](https://github.com/ActivitySim/activitysim/pull/1064).
+
+### Park-and-Ride Lot Choice and Capacity
+
+A new park-and-ride lot choice component predicts the lot used for a
+park-and-ride tour. It can be integrated with tour mode choice and can enforce
+lot capacity constraints by iteratively resampling tours assigned to full lots.
+The implementation supports single- and multiprocess runs, Sharrow skim access,
+park-and-ride logsums, and park-and-ride trip-matrix output. See
+[PR #1001](https://github.com/ActivitySim/activitysim/pull/1001).
+
+### Parquet Skim Files
+
+Skims can now be read from Parquet files in addition to OMX files. Parquet
+inputs may be dense or sparse, and OMX and Parquet sources may be mixed in the
+same configuration. The format is detected from the filename extension, so no
+settings other than the skim filename need to change. Parquet skims are
+supported by both the legacy skim-dictionary loaders and Sharrow. See
+[PR #1101](https://github.com/ActivitySim/activitysim/pull/1101).
+
+### Explicit Chunking and Performance
+
+Explicit chunking is now supported by mode-choice components and trip scheduling
+choice. The nearest-zone calculation used by disaggregate accessibility has also
+been optimized. See [PR #1088](https://github.com/ActivitySim/activitysim/pull/1088),
+[PR #1102](https://github.com/ActivitySim/activitysim/pull/1102), and
+[PR #1031](https://github.com/ActivitySim/activitysim/pull/1031).
+
+Sharrow users can now exclude unused skims while loading skim data. Sharrow
+thread limits are also managed more consistently, and a script is available for
+clearing the Sharrow cache. See
+[PR #1036](https://github.com/ActivitySim/activitysim/pull/1036) and
+[PR #1032](https://github.com/ActivitySim/activitysim/pull/1032).
+
+### Reproducibility and Model Results
+
+Trip scheduling choice now generates alternatives in a stable order so that
+single- and multiprocess runs produce the same results. School escorting also
+uses stable, semantic tie-breakers so its assignments do not depend on input
+row order. These fixes may change individual choices relative to ActivitySim
+1.5. See [PR #1005](https://github.com/ActivitySim/activitysim/pull/1005) and
+[PR #1085](https://github.com/ActivitySim/activitysim/pull/1085).
+
+Household sample rates are no longer rounded to three decimal places. This
+preserves the full precision of the ratio between the sampled and total number
+of households and may slightly change expansion factors and outputs. See
+[PR #1073](https://github.com/ActivitySim/activitysim/pull/1073).
+
+Global constants are now available in interaction-based model expressions in
+both legacy and Sharrow execution modes. See
+[PR #1095](https://github.com/ActivitySim/activitysim/pull/1095).
+
+### Deprecated `SIMULATE_CHOOSER_COLUMNS` and `LOGSUM_CHOOSER_COLUMNS`
+
+The `SIMULATE_CHOOSER_COLUMNS` and `LOGSUM_CHOOSER_COLUMNS` settings were added
+as memory hacks, to reduce the size of the interaction dataframe for components
+that combine a chooser table with an alternatives table.  These settings have
+been superseded by `drop_unused_columns`, which automatically drops the columns
+that are not needed based on the model spec, and which is enabled by default in
+the `compute_settings` for every component.  As such, these settings are now
+unnecessary, and they are a common source of hard-to-diagnose errors when a
+column used by a spec is inadvertently omitted from the list.
+
+These settings are now deprecated.  If either setting appears in a model
+configuration file, a `DeprecationWarning` is issued and the value is ignored.
+Users should remove these settings from their configuration files.  Nothing else
+needs to be done to take advantage of this change; unused columns continue to be
+dropped automatically.
+
+Relatedly, `interaction_sample` (used for destination sampling) previously
+skipped dropping unused columns entirely when a run had trace targets, which
+could result in very large interaction dataframes for traced runs.  Unused
+columns are now dropped in that case as well, retaining only the columns needed
+to identify the traced rows.  The complete chooser and alternatives tables are
+still written to the trace output before the columns are dropped.
+
+### Changed Default for Sharrow "Fastmath" Optimization
+
+The default setting for the "fastmath" optimization in sharrow has been changed
+from `True` to `False`.  This optimization can improve performance in some cases,
+but can also cause subtle and hard to diagnose bugs, particularly when the
+data being processed contains `NaN` or `Inf` values.  By defaulting to
+`False`, we aim to improve platform stability for most users.  Users who wish
+to enable the "fastmath" optimization can do so by setting the `fastmath` option
+to `True` in the `compute_settings` for each model component where it is desired.
 
 ### Skipping Failed Choices
 
-A new feature is introduced to ActivitySim to skip failed choices during model execution. 
-By default, ActivitySim will skip any failed choices during a model run, i.e., `skip_failed_choices` is set to `True`. 
-A failed choice occurs when the computed utilities for all alternatives are zero, or infinite, or nan, which can happen due to 
-data issues or model specification problems. A warning message is logged when a failed choice is encountered, 
+A new feature is introduced to ActivitySim to skip failed choices during model execution.
+By default, ActivitySim will skip any failed choices during a model run, i.e., `skip_failed_choices` is set to `True`.
+A failed choice occurs when the computed utilities for all alternatives are zero, or infinite, or nan, which can happen due to
+data issues or model specification problems. A warning message is logged when a failed choice is encountered,
 and the corresponding household (along with its persons, vehicles, tours, trips, etc) will be excluded from further model steps.
 At the end of the model run, a summary of all skipped households is provided in the log file for user reference. Users can set
-a threshold for the maximum allowed percentage of skipped households `fraction_of_failed_choices_allowed`, 
-and if the percentage of skipped households exceeds this threshold, 
-the model run will be terminated with an error. The default threshold is set to `0.001`, 0.1% of households. 
+a threshold for the maximum allowed percentage of skipped households `fraction_of_failed_choices_allowed`,
+and if the percentage of skipped households exceeds this threshold,
+the model run will be terminated with an error. The default threshold is set to `0.001`, 0.1% of households.
 
-This feature helps to ensure that the model can continue running even in the presence of data or specification issues, 
+This feature helps to ensure that the model can continue running even in the presence of data or specification issues,
 while also providing visibility into such issues that need to be addressed.
 See more information in ActivitySim's users guide "Skip Failed Choices" and code updates in [PR #1023](https://github.com/ActivitySim/activitysim/pull/1023)
 
-##### Potential Impact on Existing Model Runs:
+#### Potential Impact on Existing Model Runs
 
-With `skip_failed_choices` defaulted to `True` and an allowed failure threshold defaulted as 0.1% of households, 
-failures that were previously silently masked will now generate warnings, be explicitly skipped, and counted toward the threshold. 
-As a result, model runs that previously completed "successfully" may now fail earlier, 
+With `skip_failed_choices` defaulted to `True` and an allowed failure threshold defaulted as 0.1% of households,
+failures that were previously silently masked will now generate warnings, be explicitly skipped, and counted toward the threshold.
+As a result, model runs that previously completed "successfully" may now fail earlier,
 surfacing underlying specification or data issues that require attention rather than being silently absorbed. If an agency does not
-want to address the underlying issues immediately, they can set `skip_failed_choices` to `False` to maintain the previous model results, 
+want to address the underlying issues immediately, they can set `skip_failed_choices` to `False` to maintain the previous model results,
 but it is recommended to review the log file for any warnings about failed choices and address them as soon as possible to ensure model quality.
 
 ### Shadow Price Zones Reopening
@@ -74,7 +258,7 @@ characteristics of 3, 4, and 5-person households are expected to be somewhat
 similar to each other in any case.  If users wish to formally correct their model
 to reflect the mathematical formulation that was actually estimated in prior
 versions of ActivitySim without re-estimating the entire model, they can set
-`coef_[M,N,H]_xxx `and `coef_[M,N,H]_xxxx` to have the same value as
+`coef_[M,N,H]_xxx` and `coef_[M,N,H]_xxxx` to have the same value as
 `coef_[M,N,H]_xxxxx`. This change may impact model calibration, so it is recommended
 to proceed with caution if choosing this option. For an existing well calibrated model,
 the calibration may have already compensated for this error in the estimation,
